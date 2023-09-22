@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtre de Cartes de Paiement</title>
+  
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Mini-Projet Front End/style.css">
+    
+    <style>
+        .hidden-card {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+ <!-- Navbar Start -->
+ <nav class="navbar navbar-expand-lg" id="navbar">
+    <div class="container">
+      <img style="width: 95px; height: 100px;" src="../Mini-Projet Front End/images/logo.JPG" alt="">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span><i class="fa-solid fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#book">All</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#packages">All programs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Mini-Projet Front End/Programs.html">Filtered programs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#gallary">Gallary</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Mini-Projet Front End/Adventures.html">Adventures</a>
+          </li>
+         
+        </ul>
+        <form class="d-flex">
+         
+            
+        </form>
+      <div>
+    </div>
+  </nav>
+<!-- Navbar End -->
+
+    <div class="container mt-5">
+        <div class="header">
+            <img style="height: 185px; width: 150px; margin-left: auto;margin-right: auto; display: block;" src="../Mini-Projet Front End/images/logo.JPG" alt="Logo de l'entreprise">
+            
+        </div>
+        <h1>Filter programs</h1>
+
+    
+        <div class="input-group mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="search by region">
+            <div class="input-group-append">
+                <button class="btn btn-warning" type="button" onclick="rechercherParRegion()">Search</button>
+            </div>
+        </div>
+        <div class="btn-group mb-2" role="group" aria-label="Groupes de Boutons">
+            <!-- Boutons pour le filtrage par intervalle -->
+            <button type="button" class="btn btn-primary" onclick="filtrerParIntervalle(10, 20)">Entre 10 et 20</button>
+            <button type="button" class="btn btn-primary" onclick="filtrerParIntervalle(30, 50)">Entre 30 et 50</button>
+            <button type="button" class="btn btn-primary" onclick="filtrerParIntervalle(50, 70)">Entre 50 et 70</button>
+            <!-- Boutons pour le filtrage par région -->
+                 <button type="button" class="btn btn-secondary" onclick="afficherToutesLesCartes()">Afficher Tout</button>
+        </div>
+    
+
+        <div class="row" id="cartesContainer">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <img src="../Mini-Projet Front End/images/france.png" class="card-img-top" alt="Nom de l'image">
+    
+                    <div class="card-body">
+                        <h5 class="card-title">Aymen Jarray</h5>
+                        <p class="card-text">Age  : $23 ans </p>
+                        <p class="card-region">region : $Sousse</p>
+                        <a href="../Mini-Projet Front End/Contact.html">Contact Yassine</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <img src="../Mini-Projet Front End/images/france.png" class="card-img-top" alt="Nom de l'image">
+    
+                    <div class="card-body">
+                        <h5 class="card-title">Yassine hachfi</h5>
+                        <p class="card-text">Age  : $34 ans </p>
+                        <p class="card-region">region : $Sfax</p>
+                        <a href="../Mini-Projet Front End/Contact.html">Contact Yassine</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <img src="../Mini-Projet Front End/images/france.png" class="card-img-top" alt="Nom de l'image">
+    
+                    <div class="card-body">
+                        <h5 class="card-title">Rami</h5>
+                        <p class="card-text">Age  : $55 ans </p>
+                        <p class="card-region">region : $Sousse</p>
+                        <a href="../Mini-Projet Front End/Contact.html">Contact Rami</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        function filtrerParIntervalle(min, max) {
+            var cartes = document.getElementsByClassName("card");
+
+            for (var i = 0; i < cartes.length; i++) {
+                var ageText = cartes[i].getElementsByClassName("card-text")[0].innerText;
+                var age = parseFloat(ageText.split(": $")[1]);
+
+                if (age >= min && age <= max) {
+                    cartes[i].classList.remove("hidden-card");
+                } else {
+                    cartes[i].classList.add("hidden-card");
+                }
+            }
+        }
+
+        function afficherToutesLesCartes() {
+            var cartes = document.getElementsByClassName("card");
+
+            for (var i = 0; i < cartes.length; i++) {
+                cartes[i].classList.remove("hidden-card");
+            }
+        }
+        
+        function rechercherParRegion() {
+            var recherche = document.getElementById("searchInput").value.toLowerCase();
+            var cartes = document.getElementsByClassName("card");
+
+            for (var i = 0; i < cartes.length; i++) {
+                var regionText = cartes[i].getElementsByClassName("card-region")[0].innerText.toLowerCase();
+
+                if (regionText.includes(recherche)) {
+                    cartes[i].classList.remove("hidden-card");
+                } else {
+                    cartes[i].classList.add("hidden-card");
+                }
+            }
+        }
+    </script>
+
+  
+
+
+
+</body>
+</html>

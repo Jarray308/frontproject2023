@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Programme de Voyage</title>
+    <style>
+ 
+
+        .programme {
+            border: 1px solid #1d30db;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #0a090a;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0d00ff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form input{
+         width: 50%;
+         margin-left: auto;
+         margin-right:auto;
+         display: block;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg" id="navbar">
+      <div class="container">
+        <img style="width: 95px; height: 100px;" src="../Mini-Projet Front End/images/logo.JPG" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+          <span><i class="fa-solid fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#book">All</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#packages">All programs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Mini-Projet Front End/Programs.html">Filtered programs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#gallary">Gallary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Mini-Projet Front End/Adventures.html">Adventures</a>
+            </li>
+           
+          </ul>
+        
+        </div>
+      </div>
+    </nav>
+    <div class="home">
+      <div class="content">
+         <h1 style="color: #ccc;">Générateur de Programme de Voyage</h1>
+         <div class="form">
+         <form onsubmit="genererProgramme(event)">
+             <label for="nbrJours"  style="color: #fff; font-weight: bold;   ">Nombre de jours :</label>
+             <input class="form-control" type="number" id="nbrJours" min="1" required>
+             <br><br>
+             <label for="lieuVoyage" style="color: #fff; font-weight: bold;   ">Lieu de voyage :</label>
+             <input class="form-control" type="text" id="lieuVoyage" required>
+             <br><br>
+             <button type="submit">Générer un Programme</button>
+         </form>
+         <div class="programme" id="programmeOutput"></div>
+     
+      </div>
+        </div>
+        
+  </div>
+   
+    <script>
+        function genererProgramme(event) {
+            event.preventDefault(); 
+
+            const activites = [
+                "Visite d'un musée",
+                "Randonnée en montagne",
+                "Tennis",
+                "Plage et baignade",
+                "Exploration d'une vieille ville",
+                "Dégustation de cuisine locale",
+                "Excursion en bateau",
+                "Golf",
+                "Shopping",
+                "Visite d'un parc d'attractions",
+                "Cours de cuisine",
+                "Spectacle ou concert",
+                "Randonnée en montagne",
+                "Vélo",
+
+
+
+         "Visite d'un musée",
+       "Exploration d'une vieille ville",
+      "Plage et baignade",
+       "Dégustation de cuisine locale",
+       "Excursion en bateau",
+         "Shopping",
+            "Visite d'un parc d'attractions",
+          "Cours de cuisine",
+           "Spectacle ou concert",
+"Découverte de la faune et la flore locale",
+"Balade en bateau",
+"Détente dans un spactacle",
+"Visite de châteaux historiques",
+"Excursion en montgolfière",
+"Safari",
+"Visite de vignobles",
+"Participation à des festivals locaux",
+"Cours de danse traditionnelle",
+"Atelier d'artisanat local",
+"Cours de poterie",
+            ];
+
+            const jours = parseInt(document.getElementById("nbrJours").value);
+
+            if (isNaN(jours) || jours <= 0) {
+                alert("Veuillez entrer un nombre de jours valide.");
+                return;
+            }
+
+            const lieuVoyage = document.getElementById("lieuVoyage").value;
+
+            const programmeOutput = document.getElementById("programmeOutput");
+            programmeOutput.innerHTML = `<h2>Programme de Voyage à ${lieuVoyage}</h2>`;
+
+            for (let i = 1; i <= jours; i++) {
+                const activiteRandom = activites[Math.floor(Math.random() * activites.length)];
+                programmeOutput.innerHTML += `<p><strong>Jour ${i}:</strong> ${activiteRandom}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
